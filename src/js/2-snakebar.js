@@ -16,9 +16,9 @@ import 'izitoast/dist/css/iziToast.min.css';
 const inputDelay = document.querySelector('input[name="delay"]');
 const inputFulfilled = document.querySelector('input[value="fulfilled"]');
 const inputRejected = document.querySelector('input[value="rejected"]');
-const btnSubmit = document.querySelector('btn[type="submit"]');
+const btnSubmit = document.querySelector('button[type="submit"]');
 
-btnSubmit.addEventListener('submit', sendDelay);
+btnSubmit.addEventListener('click', sendDelay);
 function sendDelay(event) {
   event.preventDefault();
 
@@ -42,20 +42,20 @@ function userDelayValue(delayValue, isInputFulfilled, isInputRejected) {
       }, delayValue);
     }
   });
-}
 
-promise
-  .then(resolve => {
-    iziToast.success({
-      color: 'green',
-      position: 'topRight',
-      message: `✅ Fulfilled promise in ${delayValue}ms`,
+  promise
+    .then(resolve => {
+      iziToast.success({
+        color: 'green',
+        position: 'topRight',
+        message: `✅ Fulfilled promise in ${delayValue}ms`,
+      });
+    })
+    .catch(reject => {
+      iziToast.error({
+        color: 'red',
+        position: 'topRight',
+        message: `❌ Rejected promise in ${delayValue}ms`,
+      });
     });
-  })
-  .catch(reject => {
-    iziToast.error({
-      color: 'red',
-      position: 'topRight',
-      message: `❌ Rejected promise in ${delayValue}ms`,
-    });
-  });
+}
