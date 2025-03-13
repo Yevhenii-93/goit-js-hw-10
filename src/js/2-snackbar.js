@@ -24,21 +24,20 @@ function sendDelay(event) {
 
   const delayValue = Number(inputDelay.value);
   const isInputFulfilled = inputFulfilled.checked;
-  const isInputRejected = inputRejected.checked;
 
-  return userDelayValue(delayValue, isInputFulfilled, isInputRejected);
+  return userDelayValue(delayValue, isInputFulfilled);
 }
 
-function userDelayValue(delayValue, isInputFulfilled, isInputRejected) {
+function userDelayValue(delayValue, isInputFulfilled) {
   let promise = new Promise((resolve, reject) => {
     if (isInputFulfilled) {
       setTimeout(() => {
-        resolve();
+        resolve(delayValue);
       }, delayValue);
     }
-    if (isInputRejected) {
+    if (reject) {
       setTimeout(() => {
-        reject();
+        reject(delayValue);
       }, delayValue);
     }
   });
